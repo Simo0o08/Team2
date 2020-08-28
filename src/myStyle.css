@@ -1,0 +1,348 @@
+.nameTextField{
+position: absolute;
+width: 270px;
+height: 33px;
+left: 50px;
+top: 120px;
+background: #FFFFFF;
+box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+border-radius: 24px;
+border-color: #d5e4f1;
+}
+
+/* .light-mode{
+    background-color: white;
+    color:black;
+}
+
+.dark-mode{
+    background-color:rgb(31, 30, 30);
+    /* color: white; */
+/*} */
+
+.name{
+     position: absolute;
+width: 52px;
+height: 25px;
+left: 50px;
+top: 85px;
+font-family: Noto Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 25px;
+color: #000000;
+}
+
+.emailTextField{
+position: absolute;
+width: 270px;
+height: 33px;
+left: 50px;
+top: 210px;
+background: #FFFFFF;
+box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+border-radius: 24px;
+border-color: #d5e4f1;
+}
+
+.email{
+position: absolute;
+width: 48px;
+height: 25px;
+left: 50px;
+top: 180px;
+font-family: Noto Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 25px;
+color: #000000;
+}
+
+.profileTextField{
+    position: absolute;
+    width: 170px;
+    height: 33px;
+    left: 50px;
+    top: 300px;
+    background: #FFFFFF;
+    box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+    border-radius: 24px;
+    border-color: #d5e4f1;
+}
+.selectImage{
+    position: absolute;
+    width: 170px;
+    height: 33px;
+    left: 200px;
+    top: 305px;
+
+}
+.sel{
+    color: #289CFF;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+.profile{
+position: absolute;
+width: 56px;
+height: 25px;
+left: 50px;
+top: 270px;
+
+font-family: Noto Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+.button{
+position: absolute;
+width: 100px;
+height: 38px;
+left: 230px;
+top: 370px;
+background: #289CFF;
+box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+border-radius: 24px;
+border-color: #289CFF;
+}
+
+.card{
+    /* position: absolute; */
+width: 380px;
+height: 450px;
+/* left: 704px;
+top: 236px; */
+
+position: relative;
+top: 250px;
+left: 40%;
+margin-top: -100px;
+margin-left: -100px;
+background: #FFFFFF;
+box-shadow: 0px 0.4px 4px rgba(11, 14, 15, 0.3);
+border-color: black;
+border-radius: 10px;
+}
+
+.cre{
+    position: absolute;
+width: 112px;
+height: 36px;
+left: 140px;
+top: 0px;
+
+/* font-family: Noto Sans; */
+font-style: normal;
+font-weight: bold;
+font-size: 26px;
+line-height: 49px;
+
+color: #3F3F3F;
+
+}
+.searchTextField{
+    position: absolute;
+    width: 200px;
+    height: 33px;
+    left: 600px;
+    top: 35px;
+    background: #FFFFFF;
+    box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+    border-radius: 24px;
+    border-color: #d5e4f1;
+}
+
+.no{
+    position: absolute;
+width: 112px;
+height: 36px;
+left: 179px;
+top: 0px;
+
+/* font-family: Noto Sans; */
+font-style: normal;
+font-weight: bold;
+font-size: 26px;
+line-height: 49px;
+
+color: #289CFF;
+
+}
+
+.Search{
+position: absolute;
+width: 146px;
+height: 38px;
+left: 820px;
+top: 35px;
+color: white;
+border-color: #289CFF;
+background: #289CFF;
+box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+border-radius: 24px;
+}
+
+.userProfile{
+    position: absolute;
+    width: 200px;
+    height: 33px;
+    left: 1150px;
+    top: 35px;
+    background: #FFFFFF;
+    box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+    border-radius: 24px;
+    border-color: #d5e4f1;
+}
+.avatar{
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    left:50px;
+}
+
+.image{
+   position: absolute;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    left:1320px;
+    top:30px;
+}
+
+@media(max-width: 425px){
+
+
+    .cre{
+    /* position: absolute; */
+    /* width: 12px; */
+    height: 36px;
+    left: 0px;
+    top: 10px;
+
+    /* font-family: Noto Sans; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 0px;
+
+    color: #3F3F3F;
+
+    }
+    .searchTextField{
+        position: absolute;
+        width: 100px;
+        height: 23px;
+        left: 10px;
+        top: 10px;
+        background: #FFFFFF;
+        box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+        border-radius: 24px;
+        border-color: #d5e4f1;
+    }
+
+    .no{
+        /* position: absolute;
+    width: 112px; */
+    height: 36px;
+    left: 25px;
+    top: 10px;
+
+    /* font-family: Noto Sans; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 0px;
+
+    color: #289CFF;
+
+    }
+    .searchTextField{
+        position: absolute;
+        width: 100px;
+        height: 23px;
+        left: 130px;
+        top: 10px;
+        background: #FFFFFF;
+        box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+        border-radius: 24px;
+        border-color: #d5e4f1;
+    }
+
+    .Search{
+        position: absolute;
+        width: 60px;
+        height: 23px;
+        left: 240px;
+        top: 10px;
+        color: white;
+        border-color: #289CFF;
+        background: #289CFF;
+        box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+        border-radius: 24px;
+        }
+
+        .userProfile{
+            position: absolute;
+            width: 60px;
+            height: 23px;
+            left: 305px;
+            top: 10px;
+            background: #FFFFFF;
+            box-shadow: 0px 0.4px 4px rgba(40, 156, 255, 0.3);
+            border-radius: 24px;
+            border-color: #d5e4f1;
+        }
+        .avatar{
+            vertical-align: middle;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            left:50px;
+        }
+
+        .image{
+           position: absolute;
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            left:360px;
+            top:10px;
+        }
+        .card{
+            /* position: absolute; */
+        width: 380px;
+        height: 450px;
+        /* left: 704px;
+        top: 236px; */
+
+        position: relative;
+        top: 250px;
+        left: 31%;
+        margin-top: -100px;
+        margin-left: -100px;
+        background: #FFFFFF;
+        box-shadow: 0px 0.4px 4px rgba(11, 14, 15, 0.3);
+        border-color: black;
+        border-radius: 10px;
+        }
+
+
+
+
+
+
+
+
+}
