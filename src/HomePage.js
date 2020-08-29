@@ -15,6 +15,13 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import './myStyle.css'
 import SimpleModal from './SimpleModal';
+import Modal from '@material-ui/core/Modal';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 function Copyright() {
   return (
@@ -54,17 +61,14 @@ const useStyles = makeStyles((theme) => ({
         height: '100%'
     },
 
-    view:{
-        borderColor: '#289CFF',
-        backgroundColor:'#289CFF',
-        color: 'white',
-        borderRadius: 25,
-    },
+  
+   
 
     edit : {
         borderColor: '#289CFF',
         backgroundColor:'#289CFF',
         color: 'white',
+        borderRadius: 25,
     },
   col : {
     height: '1%',
@@ -102,21 +106,51 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     position: 'absolute',
-    width: 400,
+    width: 800,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    marginTop: theme.spacing(0),
+    minWidth: 100,
+    float:'right'
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+  topic:{
+    width: 600,
+  }
 }));
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+// function rand() {
+//   return Math.round(Math.random() * 20) - 10;
+// }
+
+const saveData=()=>{
+  alert("hyy");
+  return(
+    <div>
+    <SimpleModal />
+    </div>
+  );
+  }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50 ;
+  const left = 50 ;
 
   return {
     top: `${top}%`,
@@ -125,7 +159,7 @@ function getModalStyle() {
   };
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12];
+const cards = [1,2,3,4,5,6,7,8,9];
 
 export default function HomePage() {
   const classes = useStyles();
@@ -135,20 +169,52 @@ export default function HomePage() {
 
   const handleOpen = () => {
     setOpen(true);
-    alert('hy');
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+
+
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-      <SimpleModal/>
+      <form className={classes.container} noValidate>
+      <TextField
+        id="date"
+        type="date"
+        defaultValue="2017-05-24"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    </form>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Tags</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Daily Journal</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <TextField id="standard-basic" label="Topic" className={classes.topic}/>
+      <textarea type="text" id="simple-modal-description" className="modalTextArea" />
+      <button className="delete">Delete</button> &nbsp;&nbsp;&nbsp;&nbsp;
+      <button className="save" onClick={saveData}>Save</button>
+      <Modal/>
     </div>
   );
 
@@ -184,7 +250,7 @@ export default function HomePage() {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" className={classes.newNote} onClick={handleOpen}>
+                  <Button variant="outlined" className={classes.newNote} onClick={saveData}>
                     +Add a new Note
                   </Button>
                 </Grid>
@@ -199,18 +265,15 @@ export default function HomePage() {
         aria-describedby="simple-modal-description"
         >
         {body}
+        
       </Modal>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
+         
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  {/* <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  /> */}
+                 
                   <CardContent className={classes.cardContent}>
                       <div className={classes.col}></div>
                   Aug 24, 2020
@@ -222,9 +285,7 @@ export default function HomePage() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" className={classes.view}>
-                      View
-                    </Button>
+                    
                     <Button size="small" className={classes.edit}>
                       Edit
                     </Button>
@@ -236,7 +297,7 @@ export default function HomePage() {
         </Container>
       </main>
       {/* Footer */}
-      <footer className={classes.footer}>
+      {/* <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
           Footer
         </Typography>
@@ -244,7 +305,7 @@ export default function HomePage() {
           Something here to give the footer a purpose!
         </Typography>
         <Copyright />
-      </footer>
+      </footer> */}
       {/* End footer */}
     </React.Fragment>
   );
