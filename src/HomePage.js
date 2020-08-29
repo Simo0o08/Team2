@@ -14,6 +14,7 @@ import { makeStyles, withTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import './myStyle.css'
+import SimpleModal from './SimpleModal';
 
 function Copyright() {
   return (
@@ -30,12 +31,12 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     all:{
-     
+
         borderRadius: 50,
         backgroundColor: '#289CFF',
         color:'white',
-        
-        
+
+
     },
     goodReads:{
         borderRadius: 50,
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     height: '1%',
     backgroundColor: '#EC407A',
     borderRadius: '10',
-    
+
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
@@ -99,26 +100,72 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12];
 
 export default function HomePage() {
   const classes = useStyles();
 
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+    alert('hy');
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Text in a modal</h2>
+      <p id="simple-modal-description">
+        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+      </p>
+      <SimpleModal/>
+    </div>
+  );
+
   return (
     <React.Fragment>
       <CssBaseline />
+      {/* <SimpleModal /> */}
       <h2 className="cre">Cre</h2><h2 className="no">No</h2>
            <input type='text' className='searchTextField' placeholder="   Hello"   />
            <button className="Search">Search</button>
-           <div className="userProfile">Simran Keswani</div> 
+           <div className="userProfile">Simran Keswani</div>
            <div className="image"><img src="https://img.pngio.com/download-free-png-stockvader-predicted-adig-user-profile-icon-user-profile-png-880_880.png" alt="Avatar" className="avatar" /></div>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container>
-            
+
             <div className={classes.heroButtons}>
               <Grid container spacing={2}>
                 <Grid item>
@@ -137,7 +184,7 @@ export default function HomePage() {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" className={classes.newNote}>
+                  <Button variant="outlined" className={classes.newNote} onClick={handleOpen}>
                     +Add a new Note
                   </Button>
                 </Grid>
@@ -145,6 +192,14 @@ export default function HomePage() {
             </div>
           </Container>
         </div>
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        >
+        {body}
+      </Modal>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
