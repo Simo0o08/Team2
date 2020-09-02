@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -12,9 +12,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+//import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import './myStyle.css'
-import SimpleModal from './SimpleModal';
+// import SimpleModal from './SimpleModal';
 import Modal from '@material-ui/core/Modal';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,6 +24,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 function Copyright() {
   return (
@@ -51,19 +59,8 @@ const useStyles = makeStyles((theme) => ({
     tags:{
         borderRadius: 50,
     },
-    newNote:{
-        borderRadius: 50,
-        marginLeft: theme.spacing(90),
-        backgroundColor : '#289CFF',
-        padding: theme.spacing(1),
-        padding: '0 30px',
-        borderColor: '#289CFF',
-        height: '100%'
-    },
-
+    
   
-   
-
     edit : {
         borderColor: '#289CFF',
         backgroundColor:'#289CFF',
@@ -71,8 +68,14 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 25,
     },
   col : {
-    height: '1%',
-    backgroundColor: '#EC407A',
+    height: '8%',
+    backgroundColor: '#ff007f',
+    borderRadius: '10',
+
+  },
+ DivRang : {
+    height: '10%',
+    backgroundColor: '#289CFF',
     borderRadius: '10',
 
   },
@@ -131,22 +134,14 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   topic:{
-    width: 600,
+    width: 350,
+    marginBottom: theme.spacing(2),
   }
 }));
 
 // function rand() {
 //   return Math.round(Math.random() * 20) - 10;
 // }
-
-const saveData=()=>{
-  alert("hyy");
-  return(
-    <div>
-    <SimpleModal />
-    </div>
-  );
-  }
 
 function getModalStyle() {
   const top = 50 ;
@@ -159,79 +154,132 @@ function getModalStyle() {
   };
 }
 
-const cards = [1,2,3,4,5,6,7,8,9];
+const cards = [];
 
 export default function HomePage() {
   const classes = useStyles();
+  
+  var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear();
+  const [state, setState] = useState({'title':'','desc':'','tag':'','date':date + '/' + month + '/' + year})
+  const handleInputChange = e => {
+    const {name,value}=e.target
+    setState({
+      ...state,
+      [name]:value,
+      // date:selectedDate
+    })
+  }
+  const saveData = e => {
+    e.preventDefault()
+    // window.alert(`${state.agts} ${state.topic} ${state.desc} ${state.date}`)
+    cards.push(state);
+    setState({'title':'','desc':'','tag':'','date':date + '/' + month + '/' + year})
+    setOpen(false);
+  }
+
+  // const [selectedDate, setSelectedDate] = React.useState(new Date('2020-08-18T21:11:54'));
+
+  // const handleDateChange = (date) => {
+  //   setSelectedDate(date).toString();
+  // };
 
   const [modalStyle] = React.useState(getModalStyle);
+  const [search, setSearch] = React.useState('');
+  const [my_value,setValue]=useState(false);
+
+  const searchSpace = e => {
+    setSearch(e.target.value);
+  };
+  const searchFrom=()=>{
+    setValue(true);
+    console.log(search);
+    console.log("byeee");
+    console.log(my_value);
+
+    
+  }
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
+  // const editModal = (date,title,desc) => {
+  //   setOpen(true);
+  // alert(`${date}`);
+  //  };
 
   const handleClose = () => {
     setOpen(false);
   };
   
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-
-
-
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <form className={classes.container} noValidate>
-      <TextField
-        id="date"
-        type="date"
-        defaultValue="2017-05-24"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-    </form>
+    <div style={modalStyle} className="paper">
+      {/* <form className={classes.container} noValidate>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="space-around">
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          name='date'
+          value={state.date}
+          onChange={handleInputChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        </Grid>
+    </MuiPickersUtilsProvider>
+    </form> */}
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Tags</InputLabel>
+        <InputLabel id="demo-simple-select-label" className="tag">Tags</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          onChange={handleChange}
+          name="tags"
+          value={state.tags}
+          onChange={handleInputChange}
         >
-          <MenuItem value={10}>Daily Journal</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={10}>Journal</MenuItem>
+          <MenuItem value={20}>Life</MenuItem>
+          <MenuItem value={30}>Art</MenuItem>
         </Select>
       </FormControl>
-      <TextField id="standard-basic" label="Topic" className={classes.topic}/>
-      <textarea type="text" id="simple-modal-description" className="modalTextArea" />
+      <TextField id="standard-basic" label="Topic" className={classes.topic} name="topic"
+          value={state.topic} onChange={handleInputChange}/>
+          <br></br>
+      <textarea type="text" id="simple-modal-description" className="modalTextArea" name="desc"
+          value={state.desc} onChange={handleInputChange}/>
       <button className="delete">Delete</button> &nbsp;&nbsp;&nbsp;&nbsp;
       <button className="save" onClick={saveData}>Save</button>
       <Modal/>
     </div>
   );
 
-  return (
+      return(
     <React.Fragment>
       <CssBaseline />
       {/* <SimpleModal /> */}
       <h2 className="cre">Cre</h2><h2 className="no">No</h2>
-           <input type='text' className='searchTextField' placeholder="   Hello"   />
-           <button className="Search">Search</button>
-           <div className="userProfile">Simran Keswani</div>
-           <div className="image"><img src="https://img.pngio.com/download-free-png-stockvader-predicted-adig-user-profile-icon-user-profile-png-880_880.png" alt="Avatar" className="avatar" /></div>
+           <input type='text' className='searchTextField' placeholder="   Hello"  name='search' value={search} onChange={searchSpace} />
+           <button className="Search" onClick={searchFrom}>Search</button>
+          <Link to="Profiles" style={{textDecoration:"none",color:"black"}}>
+           <div className="userProfile1">Simran Keswani</div>
+           <div className="image1"><img src="https://img.pngio.com/download-free-png-stockvader-predicted-adig-user-profile-icon-user-profile-png-880_880.png" alt="Avatar" className="avatar1" /></div>
+      </Link>
+      <Link to="/" style={{textDecoration:"none",color:"black"}}><button className="logout">Logout</button></Link>
+      <button className="newNote" onClick={handleOpen} >
+         +Add a new Note
+        </button>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container>
-
             <div className={classes.heroButtons}>
               <Grid container spacing={2}>
                 <Grid item>
@@ -249,11 +297,7 @@ export default function HomePage() {
                     Tags
                   </Button>
                 </Grid>
-                <Grid item>
-                  <Button variant="outlined" className={classes.newNote} onClick={saveData}>
-                    +Add a new Note
-                  </Button>
-                </Grid>
+                
               </Grid>
             </div>
           </Container>
@@ -267,32 +311,64 @@ export default function HomePage() {
         {body}
         
       </Modal>
-        <Container className={classes.cardGrid} maxWidth="md">
-         
+
+      <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                 
-                  <CardContent className={classes.cardContent}>
-                      <div className={classes.col}></div>
-                  Aug 24, 2020
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Let’s make something cool this weekend together
-                    </Typography>
-                    <Typography>
-                    We can create a cool note taking app this using react js and node js. App must have login and signup option for user and user can create, read update and delete option for user. User can stack related notes together.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    
-                    <Button size="small" className={classes.edit}>
-                      Edit
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
+            { 
+              my_value 
+                ?
+                  cards.filter(obj=>obj.desc.includes(search) || obj.topic.includes(search)).map(
+                    (card,index) => (
+                      <Grid item key={index} xs={12} sm={6} md={4}>                
+                      
+                        <Card className={classes.card}> 
+                          <CardContent className={classes.cardContent}>
+                          <div className={classes.col}></div>
+                              {card.date}
+                            <Typography gutterBottom variant="h5" component="h2">
+                            {card.topic}
+                            </Typography>
+                            <Typography>
+                            {card.desc}
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            
+                            <Button size="small" className={classes.edit} className={classes.edit}>
+                              Edit
+                            </Button>
+                          </CardActions>
+                        </Card>
+                      </Grid>
+                      )
+                  )
+                :
+                cards.map((card,index) => (
+                  <Grid item key={index} xs={12} sm={6} md={4}>
+                    <Card className={classes.card}> 
+                      <CardContent className={classes.cardContent}>
+                          <div className={classes.col}></div>
+                          {card.date}
+                        <Typography gutterBottom variant="h5" component="h2">
+                        {card.topic}
+                        </Typography>
+                        <Typography>
+                        {card.desc}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        
+                        <Button size="small" className={classes.edit} >
+                          Edit
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                  ))
+                
+              }
+              
+            
           </Grid>
         </Container>
       </main>
@@ -310,3 +386,7 @@ export default function HomePage() {
     </React.Fragment>
   );
 }
+
+
+
+

@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Switch from '@material-ui/core/Switch';
+import {Link} from 'react-router-dom';
 // import { useForm } from "react-hook-form"; 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,10 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(15),
     
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
+  
   form: {
     width: '90%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -80,7 +78,7 @@ export default function Login() {
   return (
     <ThemeProvider theme={theme}>
     <Typography component="h1" variant="h5" className={classes.heading} align="left">
-          Cre<Box component="span" color="primary.main">No</Box>
+         <b> Cre<Box component="span" style={{color:"#289CFF"}}>No</Box></b>
       </Typography>
       <Switch checked={darkMode} onChange={()=>setDarkMode(!darkMode)} >Night Mode</Switch>
     <Container component="main" maxWidth="xs" >
@@ -90,7 +88,7 @@ export default function Login() {
       <CssBaseline />
       <div >
         <Typography component="h1" variant="h5">
-          Login
+          <b>Login</b>
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <TextField
@@ -101,6 +99,7 @@ export default function Login() {
             id="email"
             label="Email Address"
             name="email"
+            style={{color:"#289CFF"}}
             value={values.email}
             onChange={handleInputChange}
             {...(errors.email && {error:true,helperText:errors.email})}
@@ -112,6 +111,7 @@ export default function Login() {
             margin="normal"
             required
             fullWidth
+            style={{color:"#289CFF"}}
             name="password"
             value={values.password}
             onChange={handleInputChange}
@@ -122,31 +122,36 @@ export default function Login() {
             autoComplete="current-password"
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" style={{color:"#289CFF"}} />}
             label="Remember me"
           />
+          <Link to="HomePage" style={{width:"100%",textDecoration:"none"}}>
           <Button
             type="submit"
-            fullWidth
+            fullWidth 
             variant="contained"
-            color="primary"
+            style={{backgroundColor:"#289CFF"}}
             
             className={classes.submit}
           >
             Login
           </Button>
-          <Grid container>
+          </Link>
+        <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+            
                 Forgot password?
-              </Link>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
             </Grid>
-          </Grid>
+         
+            
+            <Grid container>
+            <Grid item xs>
+                 Don't have an account? 
+                <Link style={{textDecoration:'none'}} to="/SignUp">Sign Up</Link>
+                </Grid>
+            </Grid>
+          
         </form>
       </div>
       {/* <Box mt={8}>
